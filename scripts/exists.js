@@ -1,0 +1,41 @@
+(function() {
+
+    var mode = document.getElementById("mode");
+    var things = document.getElementById("things");
+    var result = document.getElementById("result");
+
+    addListener(mode, "change", symbolize);
+    addListener(things, "change", symbolize);
+    addListener(things, "keyup", symbolize);
+
+    function symbolize () {
+        var number = things.value;
+
+        if ( !parseInt(number) ) {
+            result.textContent = "CHOOSE A REAL NUMBER FUCKER";
+        }
+
+        else if ( mode.value !== "" && number !== "" ) {
+            // http://www.codingforums.com/javascript-programming/172746-iterate-through-alphabet-javascript.html#post843843
+            var vars = "abcdefghijklmnopqrstuvwxyz".split("");
+            number -= 1;
+            result.textContent = ( number < 26 ? vars[number] : vars[number % 26] + "_" + Math.floor(number / 26) );
+
+        }
+    }
+
+    /// add event listener:
+    // https://developer.mozilla.org/en-US/docs/DOM/element.addEventListener
+    // http://stackoverflow.com/a/1841941/1431858
+    /// only `type` argument is quoted (i.e.: window, "load", function())
+    function addListener(element, type, response) {
+        if (element.addEventListener) {
+            element.addEventListener(type, response, false);
+        }
+        else if (element.attachEvent) {
+            element.attachEvent("on" + type, response);
+        }
+    }
+
+
+})();

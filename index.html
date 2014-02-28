@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>∃.js</title>
+
+  <meta name="viewport" content="width=device-width" />
+  <meta name="description" content="there exists a js" />
+
+  <link rel="stylesheet" href="stylesheets/screen.css" type="text/css"
+  media="sreen" />
+  <link rel="stylesheet" href="stylesheets/print.css" type="text/css"
+  media="print" />
+<!--[if lt IE 9]>
+    <script src="scripts/html5shiv-printshiv.js"></script>
+<![endif]-->
+</head>
+<body>
+
+<main role="main">
+
+  <form>
+    <label for="mode">Generate symbolic representation of the
+    existence of</label>
+    <select name="mode" id="mode">
+      <option value="at-least">at least</option>
+      <option value="at-most">at most</option>
+      <option value="exactly">exactly</option>
+    </select>
+    <input type="number" name="things" id="things" min="1" step="1"
+    value="1" />
+    <label for="number">things</label>
+  </form>
+
+<p id="result"></p>
+
+</main>
+
+<footer role="contentinfo">
+
+<p>This was made while <a href="http://baruffio.com">underneath a buffalo</a>.</p>
+
+</footer>
+
+<script type="text/javascript" src="scripts/exists.js"></script>
+</body>
+</html>
