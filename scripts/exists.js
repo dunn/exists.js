@@ -21,7 +21,7 @@
 
         // message if a non-number is entered
         if ( !number ) {
-            symbolization += "CHOOSE A REAL NUMBER, FUCKER";
+            symbolization += "CHOOSE AN INTEGER, FUCKER";
         }
         else if ( mode.value !== "" && number !== "" ) {
             // as long as there's a number, then go ahead and generate existential quantifiers binding that many variables
