@@ -506,3 +506,8 @@ a:visited {
 .forall {
   color: #268bd2;
 }
+
+/* line 83, ../sass/screen.scss */
+.parens {
+  color: #6c71c4;
+}
