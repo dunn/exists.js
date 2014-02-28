@@ -488,8 +488,8 @@ a:visited {
 /* line 68, ../sass/screen.scss */
 #result {
   padding: 1em 0;
-  border-top: 0.25em #586e75 solid;
-  border-bottom: 0.25em #586e75 solid;
+  border-top: 0.125em #586e75 solid;
+  border-bottom: 0.125em #586e75 solid;
 }
 
 /* line 74, ../sass/screen.scss */
