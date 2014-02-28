@@ -5,12 +5,14 @@
     var things = document.getElementById("things");
     var result = document.getElementById("result");
 
+    var vars = "abcdefghijklmnopqrstuvwxyz".split("");
+
     addListener(mode, "change", symbolize);
     addListener(things, "change", symbolize);
     addListener(things, "keyup", symbolize);
 
     function symbolize () {
-        var symbolization;
+        var symbolization = "";
         var number = things.value;
 
         if ( !parseInt(number) ) {
@@ -19,24 +21,33 @@
 
         else if ( mode.value !== "" && number !== "" ) {
             // http://www.codingforums.com/javascript-programming/172746-iterate-through-alphabet-javascript.html#post843843
-            var vars = "abcdefghijklmnopqrstuvwxyz".split("");
 
             for ( var i = 0; i < number; i++ ) {
-                symbolization += "∃" + ( i < 26 ? vars[i] : vars[i % 26] + "<sub>" + Math.floor(i / 26) + "</sub>") + " ";
+                symbolization += "∃" + makeVariable(i) + " ";
             }
             symbolization += "( ";
-            // https://medium.com/html5-css3/7c80a4b731f8
-            // it's actually essential that you do `k==number` NOT `k===number`!
-            for ( var j=0,k=0; j < number && k < number; k++,j=(k==number)?j+1:j,k=(k==number)?k=0:k ) {
-                // prevents a≠a and prevents b≠a after a≠b
-                if ( j < k ) {
-                    symbolization += ( j < 26 ? vars[j] : vars[j % 26] + "<sub>" + Math.floor(j / 26) + "</sub>") + "≠" + ( k < 26 ? vars[k] : vars[k % 26] + "<sub>" + Math.floor(k / 26) + "</sub>");
-                    symbolization += " ";
+            if ( mode.value === "at-least" || mode.value === "exactly" ) {
+                // https://medium.com/html5-css3/7c80a4b731f8
+                // it's actually essential that you do `k==number` NOT `k===number`!
+                for ( var j=0,k=0; j < number && k < number; k++,j=(k==number)?j+1:j,k=(k==number)?k=0:k ) {
+                    // prevents a≠a and prevents b≠a after a≠b
+                    if ( j < k ) {
+                        symbolization += makeVariable(j) + "≠" + makeVariable(k);
+                        symbolization += " ";
+                    }
                 }
             }
+
+//            if ( mode.value === "exactly" ) {
             symbolization += " )";
         }
+        // only mess with the DOM like this once or else it's slow as hell
         result.innerHTML = symbolization;
+    }
+
+    /// generate variables
+    function makeVariable(n) {
+        return n < 26 ? vars[n] : vars[n % 26] + "<sub>" + Math.floor(n / 26) + "</sub>";
     }
 
     /// add event listener:
