@@ -5,6 +5,7 @@
     var things = document.getElementById("things");
     var result = document.getElementById("result");
 
+    // array of variable letters for makeVariable()
     var vars = "abcdefghijklmnopqrstuvwxyz".split("");
 
     addListener(mode, "change", symbolize);
@@ -12,20 +13,22 @@
     addListener(things, "keyup", symbolize);
 
     function symbolize () {
+        // build the string in a variable so we don't have to keep
+        // messing around in the DOM
         var symbolization = "";
-        var number = things.value;
 
-        if ( !parseInt(number) ) {
+        var number = parseInt(things.value);
+
+        // message if a non-number is entered
+        if ( !number ) {
             symbolization += "CHOOSE A REAL NUMBER, FUCKER";
         }
-
         else if ( mode.value !== "" && number !== "" ) {
-            number = parseInt(number);
-            // http://www.codingforums.com/javascript-programming/172746-iterate-through-alphabet-javascript.html#post843843
-
+            // as long as there's a number, then go ahead and generate existential quantifiers binding that many variables
             for ( var i = 0; i < number; i++ ) {
                 symbolization += "<span class=\"logic exists\">∃</span>" + makeVariable(i) + " ";
             }
+            // now if there's a minimum number of things...
             if ( mode.value === "at-least" || mode.value === "exactly" ) {
                 symbolization += "<span class=\"parens\">(</span> ";
                 // https://medium.com/html5-css3/7c80a4b731f8
@@ -39,7 +42,7 @@
                 // remove the trailing "∧ "
                 symbolization = (number > 1 ? symbolization.slice(0,symbolization.length - 2) : symbolization);
             }
-
+            // if there's a maximum number of things...
             if ( mode.value === "exactly" || mode.value === "at-most" ) {
                 var forAllVar = makeVariable(number);
                 symbolization += (mode.value === "exactly" && number > 1 ? " ∧" : "") + " <span class=\"logic forall\">∀</span>" + forAllVar + " <span class=\"parens\">(</span> ";
@@ -55,12 +58,10 @@
         result.innerHTML = symbolization;
     }
 
-    /// generate variables
     function makeVariable(n) {
         return n < 26 ? vars[n] : vars[n % 26] + "<sub>" + Math.floor(n / 26) + "</sub>";
     }
 
-    /// add event listener:
     // https://developer.mozilla.org/en-US/docs/DOM/element.addEventListener
     // http://stackoverflow.com/a/1841941/1431858
     /// only `type` argument is quoted (i.e.: window, "load", function())
@@ -72,6 +73,5 @@
             element.attachEvent("on" + type, response);
         }
     }
-
 
 })();
