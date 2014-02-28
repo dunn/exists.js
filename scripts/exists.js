@@ -16,7 +16,7 @@
         var number = things.value;
 
         if ( !parseInt(number) ) {
-            result.textContent = "CHOOSE A REAL NUMBER FUCKER";
+            symbolization += "CHOOSE A REAL NUMBER, FUCKER";
         }
 
         else if ( mode.value !== "" && number !== "" ) {
