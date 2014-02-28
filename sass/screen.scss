@@ -1,5 +1,82 @@
+@import url(http://fonts.googleapis.com/css?family=Alegreya+Sans+SC:500,700);
 @import "normalize";
 
+////////// SOLARIZED ////////////////////////////////////////
+// Copyright (c) 2011 Ethan Schoonover //////////////////////
+// Released under the MIT license and available at //////////
+////////// http://ethanschoonover.com/solarized /////////////
+$base03:    #002b36;
+$base02:    #073642;
+$base01:    #586e75;
+$base00:    #657b83;
+$base0:     #839496;
+$base1:     #93a1a1;
+$base2:     #eee8d5;
+$base3:     #fdf6e3;
+$yellow:    #b58900;
+$orange:    #cb4b16;
+$red:       #dc322f;
+$magenta:   #d33682;
+$violet:    #6c71c4;
+$blue:      #268bd2;
+$cyan:      #2aa198;
+$green:     #859900;
+
 body {
-  font-family: "Helvetica", san-serif;
+  margin: 0 auto;
+  width: 90%;
+  text-align: center;
+
+  background-color: $base03;
+  color: $base0;
+
+  font-family: "Alegreya Sans SC", "Helvetica Neue";
+  font-size: 16pt;
+}
+
+h1 {
+  font-size: 300%;
+}
+
+h2 {
+  font-size: 225%;
+}
+
+h3 {
+  font-size: 150%;
+}
+
+h4 {
+  font-size: 131.25%;
+}
+
+h5 {
+  font-size: 112.5%;
+}
+
+h6 {
+  font-size: 100%;
+}
+
+a {
+  color: $base1;
+  &:visited {
+    color: $base01;
+  }
+}
+
+#result {
+  padding: 1em 0;
+  border-top: .25em $base0 solid;
+  border-bottom: .25em $base0 solid;
+}
+
+.logic {
+  font-weight: bold;
+}
+.exists {
+  color: $cyan;
+}
+.forall {
+  color: $blue;
 }
