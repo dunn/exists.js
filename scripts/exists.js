@@ -5,14 +5,18 @@
     var things = document.getElementById("things");
     var result = document.getElementById("result");
 
-    // array of variable letters for makeVariable()
-    var vars = "abcdefghijklmnopqrstuvwxyz".split("");
-
     addListener(mode, "change", symbolize);
     addListener(things, "change", symbolize);
     addListener(things, "keyup", symbolize);
 
     function symbolize () {
+        function makeVariable(n) {
+            // this might be marginally faster than .split("")?
+            // from http://www.codingforums.com/javascript-programming/172746-iterate-through-alphabet-javascript.html#post843843
+            var vars = "abcdefghijklmnopqrstuvwxyz";
+            return n < 26 ? vars.charAt(n) : vars.charAt(n % 26) + "<sub>" + Math.floor(n / 26) + "</sub>";
+        }
+
         // build the string in a variable so we don't have to keep
         // messing around in the DOM
         var symbolization = "";
@@ -56,10 +60,6 @@
         }
         // only mess with the DOM like this once or else it's slow as hell
         result.innerHTML = symbolization;
-    }
-
-    function makeVariable(n) {
-        return n < 26 ? vars[n] : vars[n % 26] + "<sub>" + Math.floor(n / 26) + "</sub>";
     }
 
     // https://developer.mozilla.org/en-US/docs/DOM/element.addEventListener
