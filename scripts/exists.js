@@ -34,7 +34,10 @@
             }
             // now if there's a minimum number of things...
             if ( mode.value === "at-least" || mode.value === "exactly" ) {
-                symbolization += "<span class=\"parens\">(</span> ";
+				// if symbolizing "at least one thing", there's going to be no closing paren, so no opening one either
+				if ( !(mode.value === "at-least" && number === 1)) {
+					symbolization += "<span class=\"parens\">(</span> ";
+				}
                 // https://medium.com/html5-css3/7c80a4b731f8
                 // it's actually essential that you do `k==number` NOT `k===number`!
                 for ( var j=0,k=0; j < number && k < number; k++,j=(k==number)?j+1:j,k=(k==number)?k=0:k ) {
